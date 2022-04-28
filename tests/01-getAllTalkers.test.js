@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const talkersSeed = require('./seed.json');
 
-const url = 'http://localhost:3000';
+const url = 'http://localhost:3002';
 
 describe('1 - Crie o endpoint GET /talker', () => {
   beforeEach(() => {
