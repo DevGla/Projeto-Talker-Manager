@@ -5,24 +5,18 @@ const fs = require('fs');
 const palestrantes = require('./talker.json');
 
 const palestrante = './talker.json';
-try {
-  const data = fs.readFileSunc(JSON.parse(palestrante), 'utf8');
-  console.log(data);
-} catch (err) {
-  console.error(`Erro ao ler o arquivo: ${err.path}`);
-  console.log(err);
-}
 
 const app = express();
 app.use(bodyParser.json());
 
 const HTTP_OK_STATUS = 200;
-const PORT = '3002';
+const PORT = '3000';
 
 // Requisito 1
 app.get('/talker', (req, res) => {
-  if (palestrantes.length === 0) return res.status(HTTP_OK_STATUS).json([]);
-  return res.status(HTTP_OK_STATUS).json(palestrantes);
+  const palestrant = fs.readFileSync(palestrante, 'utf-8');
+    if (palestrant.length > 0) return res.status(200).json(JSON.parse(palestrant));
+    return res.status(200).json([]);
 });
 
 // Requisito 2
