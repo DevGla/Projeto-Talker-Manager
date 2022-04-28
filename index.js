@@ -2,7 +2,6 @@ const express = require('express');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const palestrantes = require('./talker.json');
 
 const palestrante = './talker.json';
 
@@ -22,8 +21,9 @@ app.get('/talker', (req, res) => {
 // Requisito 2
 
 app.get('/talker/:id', (req, res) => {
+  const palestrant = JSON.parse(fs.readFileSync(palestrante, 'utf-8'));
   const { id } = req.params;
-  const palestrantesID = palestrantes.find((r) => r.id === parseInt(id, 0));
+  const palestrantesID = palestrant.find((r) => r.id === parseInt(id, 0));
   
   if (!palestrantesID) {
     return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
