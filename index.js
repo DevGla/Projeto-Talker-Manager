@@ -2,6 +2,7 @@ const express = require('express');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const validateEmailAndPassa = require('./validations/validateEmailAndPassa');
 
 const palestrante = './talker.json';
 
@@ -33,12 +34,8 @@ app.get('/talker/:id', (req, res) => {
 });
 
 // Requisito 3
-const validEmailAndPass = [];
 
-app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  validEmailAndPass.push({ email, password });
-  console.log(validEmailAndPass);
+app.post('/login', validateEmailAndPassa, (req, res) => {
   const token = crypto.randomBytes(8).toString('hex');
   return res.status(200).json({ token });
 });
