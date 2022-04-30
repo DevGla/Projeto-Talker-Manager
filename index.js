@@ -30,7 +30,8 @@ app.get('/talker', async (req, res) => {
 // Requisito 2
 
 app.get('/talker/:id', async (req, res) => {
-  const palestrant = await fs.readFile(palestrante, 'utf-8').then((data) => data);
+  const doc = await fs.readFile(palestrante, 'utf-8').then((data) => data);
+  const palestrant = JSON.parse(doc);
   const { id } = req.params;
   const palestrantesID = palestrant.find((r) => r.id === parseInt(id, 0));
   
@@ -74,6 +75,14 @@ app.post('/talker',
 
 // Requisito 6
 
+/* app.put('/talker:id', async (req, res) => {
+  const doc = await fs.readFile(palestrante, 'utf-8').then((data) => data);
+  const palestrant = JSON.parse(doc);
+  const { id } = req.params;
+  const talk = req.body;
+  const array = palestrant.map((palestrante) => {})
+});
+ */
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
