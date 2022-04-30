@@ -1,6 +1,6 @@
 const frisby = require('frisby');
 
-const url = 'http://localhost:3000';
+const url = 'http://localhost:3004';
 
 describe('4 - Adicione as validações para o endpoint /login', () => {
  

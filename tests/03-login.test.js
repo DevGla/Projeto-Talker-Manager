@@ -1,6 +1,6 @@
 const frisby = require('frisby');
 
-const url = 'http://localhost:3000';
+const url = 'http://localhost:3004';
 const tokenCollection = [];
 
 describe('3 - Crie o endpoint POST /login', () => {
