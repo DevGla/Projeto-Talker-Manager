@@ -18,7 +18,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const HTTP_OK_STATUS = 200;
-const PORT = '3004';
+const PORT = '3000';
 
 // Requisito 1
 app.get('/talker', async (req, res) => {
@@ -71,9 +71,8 @@ app.post('/talker',
   await fs.writeFile(palestrante, JSON.stringify(palestrants));
   return res.status(201).json(obj);
 });
-// colocar em variável um obj que tenha todas as informações 
-// fs de escrita jogando a variável 
-// para escrever eu posso pegar o array e verificar o tamanho e somar mais 1 no id
+
+// Requisito 6
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {

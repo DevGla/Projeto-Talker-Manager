@@ -9,7 +9,7 @@ const postTalkerMock = {
   talk: { rate: 5, watchedAt: '25/09/2020' },
 };
 
-const url = 'http://localhost:3004';
+const url = 'http://localhost:3000';
 
 describe('5 - Crie o endpoint POST /talker', () => {
   beforeEach(() => {
