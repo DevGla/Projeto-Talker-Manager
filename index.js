@@ -44,7 +44,7 @@ app.get('/talker/:id', async (req, res) => {
 
 // Requisito 3 e 4 
 
-app.post('/login', validateEmailAndPassa, (req, res) => {
+app.post('/login', validateEmailAndPassa, (_req, res) => {
   const token = crypto.randomBytes(8).toString('hex');
   return res.status(HTTP_OK_STATUS).json({ token });
 });
@@ -75,14 +75,26 @@ app.post('/talker',
 
 // Requisito 6
 
-/* app.put('/talker:id', async (req, res) => {
+app.put('/talker/:id',
+  validateToken,
+  validationName,
+  validateAge,
+  validateTalk,
+  validateWatchedAt,
+  validadeRate, async (req, res) => {
+  const { id } = req.params;
+  const { name, age, talk } = req.body;
+  const newObj = { name, age, talk, id: Number(id) };
   const doc = await fs.readFile(palestrante, 'utf-8').then((data) => data);
   const palestrant = JSON.parse(doc);
-  const { id } = req.params;
-  const talk = req.body;
-  const array = palestrant.map((palestrante) => {})
+  const takId = palestrant.find((r) => r.id === parseInt(id, 0));  
+  if (!takId) return res.status(404).json({ message: 'Recipe not found!' });
+  const newArray = [palestrant[takId] = { ...palestrant[takId], name, age, talk, id: Number(id) }];
+  await fs.writeFile(palestrante, JSON.stringify(newArray));
+
+  res.status(200).json(newObj);
 });
- */
+
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
