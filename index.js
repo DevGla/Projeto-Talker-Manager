@@ -95,6 +95,18 @@ app.put('/talker/:id',
   res.status(200).json(newObj);
 });
 
+// Requisito 7
+
+app.delete('/talker/:id', validateToken, async (req, res) => {
+  const { id } = req.params;
+  const doc = await fs.readFile(palestrante, 'utf-8').then((data) => data);
+  const palestrant = JSON.parse(doc);
+  const takId = palestrant.find((r) => r.id === parseInt(id, 0));
+  if (takId === -1) return res.status(404).json({ message: 'Recipe not found!' });
+  await fs.writeFile(palestrante, JSON.stringify(palestrant.splice(takId, 1)));
+  res.status(204).end();
+});
+
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
