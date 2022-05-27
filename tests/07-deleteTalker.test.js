@@ -2,7 +2,7 @@ const frisby = require('frisby');
 const fs = require('fs');
 const path = require('path');
 
-const url = 'http://localhost:3000';
+const url = 'http://localhost:3004';
 
 describe('7 - Crie o endpoint DELETE /talker/:id', () => {
   beforeEach(() => {

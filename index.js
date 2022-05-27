@@ -18,7 +18,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const HTTP_OK_STATUS = 200;
-const PORT = '3000';
+const PORT = '3004';
 
 // Requisito 1
 app.get('/talker', async (req, res) => {
@@ -84,14 +84,14 @@ app.put('/talker/:id',
   validadeRate, async (req, res) => {
   const { id } = req.params;
   const { name, age, talk } = req.body;
-  const newObj = { name, age, talk, id: Number(id) };
+  const newObj = { name, age, talk, id: parseInt(id, 0) };
   const doc = await fs.readFile(palestrante, 'utf-8').then((data) => data);
   const palestrant = JSON.parse(doc);
-  const takId = palestrant.find((r) => r.id === parseInt(id, 0));  
+  const takId = palestrant.find((r) => r.id === parseInt(id, 0));
   if (!takId) return res.status(404).json({ message: 'Recipe not found!' });
-  const newArray = [palestrant[takId] = { ...palestrant[takId], name, age, talk, id: Number(id) }];
+  const newArray = [
+    palestrant[takId] = { ...palestrant[takId], name, age, talk, id: parseInt(id, 0) }];
   await fs.writeFile(palestrante, JSON.stringify(newArray));
-
   res.status(200).json(newObj);
 });
 
